@@ -1,0 +1,92 @@
+def add(a,b): 
+    return a * b + b
+
+res = add(2,3) 
+print("最终结果为：",res)
+
+
+
+2没做
+
+
+
+这个程序将输出8
+d是局部变量
+
+
+
+程序首先给全局变量a、b、c分别赋值为3、2、1。然后程序进入do_add函数。在do_add函数中，全局变量c的值被改变为a+b，即c的值被改变为5，然后程序进入do_sub函数。局部变量c被赋值为a-b,结合参数可知局部变量c值为4，随后程序进入do_mul函数。在do_mul函数中，全局变量c的值被改为a*b,结合参数可知c的值此时为16，print（c）语句产生输出16，do_mul函数返回全局变量c的值，则do_sub中局部变量c的值被赋为16，随后程序进入do_div函数。do_div中局部变量c的值被赋值为8，print语句输出局部变量c的值8，随后do_div函数返回局部变量c的值8，则do_sub中局部变量c的值被赋为8，print语句输出局部变量c的值8，然后do_sub返回局部变量c的值8。此时程序的流程回到do_add函数中，全局变量c被赋值为8，do_add函数中print语句输出8，随后do_add函数返回，主函数中print语句输出全局变量c的值8
+综上所述，程序输出结果如下：
+16
+8
+8
+8
+8
+
+
+
+c在do_add中是否为全局变量不会影响四个函数内部的输出，全局变量c的值只有一次位于do_mul中的改变，参考上题答案知c的值被改变为16，故程序前四行输出不变，第五行输出变为16
+详细流程分析如下：
+程序首先给全局变量a、b、c分别赋值为3、2、1。然后程序进入do_add函数。在do_add函数中，局部变量c的值被改变为a+b，即c的值被改变为5，然后程序进入do_sub函数。局部变量c被赋值为a-b,结合参数可知局部变量c值为4，随后程序进入do_mul函数。在do_mul函数中，全局变量c的值被改为a*b,结合参数可知c的值此时为16，print（c）语句产生输出16，do_mul函数返回全局变量c的值，则do_sub中局部变量c的值被赋为16，随后程序进入do_div函数。do_div中局部变量c的值被赋值为8，print语句输出局部变量c的值8，随后do_div函数返回局部变量c的值8，则do_sub中局部变量c的值被赋为8，print语句输出局部变量c的值8，然后do_sub返回局部变量c的值8。此时程序的流程回到do_add函数中，局部变量c被赋值为8，do_add函数中print语句输出8，随后do_add函数返回，主函数中print语句输出全局变量c的值16
+综上所述，程序输出结果如下：
+16
+8
+8
+8
+16
+
+
+
+#打印结果：Finally, a is: 18 and b is: 2
+a=1;b=2 #全局变量a，b
+def fun(x): 
+    def F(): 
+        global a ;  a=x+y+b #a，b为全局变量 x，y为局部变量 
+        return a #a为全局变量
+    y=12 ; x=x+2 ; a=F()  #a，x，y为局部变量
+fun(b) #b为全局变量
+print("Finally, a is: %d and b is: %d"%(a,b)) #a，b为全局变量
+
+
+
+def removeAll(L,x):
+    L2 = []
+    for i in L:
+        if i != x:
+            L2.append(i)
+    L.clear()
+    for i in L2:
+        L.append(i)
+    
+L = [1,1,4,5,1,4,1,7,4,7,1,9,1,9]
+removeAll(L,1)
+print(L)
+
+
+
+def append(L,x):
+    L.insert(len(L),x)
+
+L = [1,1,4,5,1]
+append(L,4)
+print(L)
+
+
+
+
+def rev(s):
+    r = []
+    for i in range(len(s)-1,-1,-1):
+        r.append(s[i])
+    return "".join(r)
+
+L = ['It is','very very','funny','!']
+l = len(L)
+mid = l >> 1
+for i in range(mid):
+    j = l - i - 1
+    r = rev(L[i])
+    L[i],L[j] = rev(L[j]),r
+if l & 1:
+    L[mid] = rev(L[mid])
+print(L)
