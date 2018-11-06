@@ -10,7 +10,7 @@ def fto2(s):
     if r[0] == []:
         r[0].append(0)
     s = 0.0
-    for i in range(1,26):
+    for i in range(1,151):
         power = 2 ** (-i)
         if s + power <= p2:
             r[1].append(1)
@@ -47,16 +47,19 @@ def dec2float(x):
         if r[1][i] == 1:
             break
         i += 1
-    if i + 1 > 126 or (i == len(r[1]) and r[0] == [0]):
+    if r[0] == [0] and i + 1 > 126:
         return "".join(["0" for i in range(32)])
     if r[0] != [0]:
         e = len(r[0]) - 1
+        r = r[0] + r[1]
+        if r[24] == 1 and r[23] == 0:
+            r[23] = 1
+        return sign + exp(e,8) + "".join([chr(d + ord('0')) for d in r[1:24]])
     else:
         e = -i - 1
-    r = r[0] + r[1]
-    if r[24] == 1 and r[23] == 0:
-        r[23] = 1
-    return sign + exp(e,8) + "".join([chr(d + ord('0')) for d in r[1:24]])
+        if r[1][i + 24] == 1 and r[1][i + 23] == 0:
+            r[1][i + 23] = 1
+        return sign + exp(e,8) + "".join([chr(d + ord('0')) for d in r[1][i+1:i + 24]])
 
 num = lambda x:ord(x) - ord('0')
 
